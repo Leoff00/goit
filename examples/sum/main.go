@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"time"
 )
 
@@ -16,10 +15,6 @@ func (u *User) Birth() int {
 
 func sum(a, b int) int {
 	return a + b
-}
-
-func main() {
-	fmt.Println("2 + 3 =", sum(2, 3))
 }
 
 /*goit:test

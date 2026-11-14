@@ -2,6 +2,59 @@
 
 `goit` runs tests written inside a `/*goit:test ... goit:end*/` comment without editing the original Go file. The parser validates and extracts the block; the runner creates a temporary test file and delegates execution to `go test`.
 
+the following example: 
+
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+type User struct {
+	Name string
+	Age  int
+}
+
+func (u *User) Birth() int {
+	return time.Now().Year() - u.Age
+}
+
+func sum(a, b int) int {
+	return a + b
+}
+
+/*goit:test
+
+import "testing"
+
+func TestBirth(t *testing.T) {
+	u := User{
+		Name: "Goit",
+		Age: 17,
+	}
+
+	if got, want := u.Birth(), 2009; got != want {
+		t.Fatalf("birth mismatch = %d, want %d", got, want)
+	}
+}
+
+func TestSum(t *testing.T) {
+	if got, want := sum(2, 3), 5; got != want {
+		t.Fatalf("sum(2, 3) = %d, want %d", got, want)
+	}
+}
+
+func TestSumNegative(t *testing.T) {
+	if got, want := sum(-2, -3), -5; got != want {
+		t.Fatalf("sum(-2, -3) = %d, want %d", got, want)
+	}
+}
+
+goit:end*/
+```
+
 ## Build and usage
 
 ```sh
